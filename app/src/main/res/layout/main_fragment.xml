@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -10,76 +9,68 @@
         android:id="@+id/mainView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
         android:orientation="vertical"
-        tools:context=".ui.main.MainFragment">
+        tools:context=".view.MainFragment">
 
         <TextView
-            android:id="@+id/cityName"
+            android:id="@+id/category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:textSize="25sp"
+            android:layout_marginTop="@dimen/marginTop_category_30"
+            android:text="@string/popular"
+            android:textSize="@dimen/textSize_category_25"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/movieImg"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="@dimen/marginTop_category_30"
+            android:background="@color/purple_200"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/movieName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="35sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Popular" />
+            tools:text="Movie" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/movieYear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="italic"
+                tools:text="2021" />
+
+            <TextView
+                android:id="@+id/movieRating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="5" />
+        </LinearLayout>
+
 
         <TextView
-            android:id="@+id/cityCoordinates"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cityName"
-            tools:text="lt/ln: 55.755826, 37.617299900000035" />
-
-
-        <TextView
-            android:id="@+id/temperatureLabel"
+            android:id="@+id/movieDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="@string/temperature_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cityCoordinates" />
+            android:ellipsize="end"
+            android:maxLines="5"
+            tools:text="@tools:sample/lorem/random" />
 
-        <TextView
-            android:id="@+id/temperatureValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_15_dp"
-            android:textSize="@dimen/temperature_value_text_size"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/temperatureLabel"
-            tools:text="+15" />
-
-        <TextView
-            android:id="@+id/feelsLikeLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_15_dp"
-            android:text="@string/feels_like_label"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/temperatureValue" />
-
-        <TextView
-            android:id="@+id/feelsLikeValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_15_dp"
-            android:textSize="@dimen/feels_like_text_size"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/feelsLikeLabel"
-            tools:text="-23" />
 
     </LinearLayout>
 
@@ -87,11 +78,20 @@
         android:id="@+id/loadingLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/teal_700"
+        android:background="@android:color/darker_gray"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone"
         tools:visibility="gone">
+
+        <TextView
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:text="@string/loading"
+            android:textSize="35sp"
+            android:textStyle="bold" />
 
         <ProgressBar
             style="?android:attr/progressBarStyleLarge"

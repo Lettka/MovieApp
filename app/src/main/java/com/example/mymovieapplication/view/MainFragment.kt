@@ -1,4 +1,4 @@
-package com.example.mymovieapplication.ui.main
+package com.example.mymovieapplication.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.mymovieapplication.AppState
-import com.example.mymovieapplication.R
-import com.example.mymovieapplication.Weather
 import com.example.mymovieapplication.databinding.MainFragmentBinding
+import com.example.mymovieapplication.model.Movie
+import com.example.mymovieapplication.viewmodel.AppState
+import com.example.mymovieapplication.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 
 class MainFragment : Fragment() {
@@ -39,20 +39,24 @@ class MainFragment : Fragment() {
         viewModel.getLiveData().observe(viewLifecycleOwner, Observer {
             renderData(it)
         })
-        viewModel.getWeatherFromLocalSource()
+        viewModel.getMovieFromLocalSource()
     }
 
     private fun renderData(appState: AppState) {
         when (appState) {
             is AppState.Success -> {
-                val weatherData = appState.weatherData
+                val movieData = appState.movieData
                 binding.loadingLayout.visibility = View.GONE
-                setData(weatherData)
+                setData(movieData)
             }
             is AppState.Error -> {
-                binding.loadingLayout.visibility = View.GONE
-                Snackbar.make(binding.root, "Error", Snackbar.LENGTH_INDEFINITE)
-                    .setAction("Reload") { viewModel.getWeatherFromLocalSource() }
+                binding.loadingLayout.visibility = View.VISIBLE
+                Snackbar.make(
+                    binding.root,
+                    appState.error.message.toString(),
+                    Snackbar.LENGTH_INDEFINITE
+                )
+                    .setAction("Try again") { viewModel.getMovieFromLocalSource() }
                     .show()
             }
             is AppState.Loading -> {
@@ -61,15 +65,11 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun setData(weatherData: Weather) {
-        binding.cityName.text = weatherData.city.city
-        binding.cityCoordinates.text = String.format(
-            getString(R.string.city_coordinates),
-            weatherData.city.lat.toString(),
-            weatherData.city.lon.toString(),
-        )
-        binding.temperatureValue.text = weatherData.temperature.toString()
-        binding.feelsLikeValue.text = weatherData.feelsLike.toString()
+    private fun setData(movieData: Movie) {
+        binding.movieName.text = movieData.name
+        binding.movieYear.text = movieData.year.toString()
+        binding.movieRating.text = movieData.rating.toString()
+        binding.movieDescription.text = movieData.description
     }
 
     override fun onDestroy() {

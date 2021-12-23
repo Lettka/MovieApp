@@ -3,4 +3,6 @@
     <string name="temperature_label">temperature</string>
     <string name="feels_like_label">Fells like</string>
     <string name="city_coordinates">lt/ln: %s, %s"</string>
+    <string name="popular">Popular</string>
+    <string name="loading">loading...</string>
 </resources>
