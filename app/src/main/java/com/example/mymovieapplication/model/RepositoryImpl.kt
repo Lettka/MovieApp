@@ -1,15 +1,9 @@
 package com.example.mymovieapplication.model
 
 class RepositoryImpl : Repository {
-    override fun getMovieFromServer(): Movie {
-        return Movie()
-    }
+    override fun getMovieFromServer(): Movie = Movie()
 
-    override fun getMovieFromLocalStorageRus(): List<Category> {
-        return getCategoriesRus()
-    }
+    override fun getMovieFromLocalStorageRus(): List<Category> = getCategoriesRus()
 
-    override fun getMovieFromLocalStorageEng(): List<Category> {
-        return getCategoriesEng()
-    }
+    override fun getMovieFromLocalStorageEng(): List<Category> = getCategoriesEng()
 }

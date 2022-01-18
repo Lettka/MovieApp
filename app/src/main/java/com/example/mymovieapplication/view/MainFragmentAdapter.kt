@@ -22,8 +22,10 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
 
     fun setCategory(data: List<Category>) {
         categoryData = data
-        notifyDataSetChanged()
+        //notifyDataSetChanged()
     }
+
+    fun getCategory(): List<Category> = categoryData
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

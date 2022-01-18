@@ -11,6 +11,7 @@ class Category(
 
 fun getDefaultListOfMovie() = listOf(
     Movie(
+        "1",
         "Путь снежного меча",
         2021,
         53.0,
@@ -18,6 +19,7 @@ fun getDefaultListOfMovie() = listOf(
         false
     ),
     Movie(
+        "2",
         "Место под Солнцем",
         2021,
         55.0,
@@ -25,6 +27,7 @@ fun getDefaultListOfMovie() = listOf(
         false
     ),
     Movie(
+        "3",
         "A Little Mood For Love",
         2021,
         47.5,
@@ -32,6 +35,7 @@ fun getDefaultListOfMovie() = listOf(
         false
     ),
     Movie(
+        "4",
         "Женись на мне",
         2021,
         37.5,
@@ -39,6 +43,7 @@ fun getDefaultListOfMovie() = listOf(
         false
     ),
     Movie(
+        "5",
         "Йеллоустоун",
         2018,
         80.3,
@@ -46,6 +51,7 @@ fun getDefaultListOfMovie() = listOf(
         false
     ),
     Movie(
+        "6",
         "Декстер: Новая кровь",
         2021,
         85.5,
@@ -53,6 +59,7 @@ fun getDefaultListOfMovie() = listOf(
         false
     ),
     Movie(
+        "7",
         "Анупама",
         2020,
         47.5,
@@ -60,6 +67,7 @@ fun getDefaultListOfMovie() = listOf(
         false
     ),
     Movie(
+        "8",
         "Улица коронации",
         1960,
         54.5,
@@ -67,6 +75,7 @@ fun getDefaultListOfMovie() = listOf(
         false
     ),
     Movie(
+        "9",
         "Кобра Кай",
         2018,
         81.5,
@@ -74,6 +83,7 @@ fun getDefaultListOfMovie() = listOf(
         false
     ),
     Movie(
+        "10",
         "Симпсоны",
         1989,
         79.5,
@@ -82,22 +92,18 @@ fun getDefaultListOfMovie() = listOf(
     )
 )
 
-fun getCategoriesRus(): List<Category> {
-    return listOf(
-        Category("Популярные"),
-        Category("Новинки"),
-        Category("Смотрят сейчас"),
-        Category("Ожидаемые"),
-        Category("Лучшие")
-    )
-}
+fun getCategoriesRus(): List<Category> = listOf(
+    Category("Популярные"),
+    Category("Новинки"),
+    Category("Смотрят сейчас"),
+    Category("Ожидаемые"),
+    Category("Лучшие")
+)
 
-fun getCategoriesEng(): List<Category> {
-    return listOf(
-        Category("Popular"),
-        Category("New"),
-        Category("Now Playing"),
-        Category("Upcoming"),
-        Category("Top Rated")
-    )
-}
+fun getCategoriesEng(): List<Category> = listOf(
+    Category("Popular"),
+    Category("New"),
+    Category("Now Playing"),
+    Category("Upcoming"),
+    Category("Top Rated")
+)

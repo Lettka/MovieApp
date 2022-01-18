@@ -4,7 +4,9 @@
     <string name="feels_like_label">Fells like</string>
     <string name="city_coordinates">lt/ln: %s, %s"</string>
     <string name="popular">Popular</string>
-    <string name="loading">loading...</string>
+    <string name="loading">loading…</string>
     <string name="movie_name">Movie</string>
     <string name="movie_year">2021</string>
+    <string name="reload">Try again.</string>
+    <string name="update">update</string>
 </resources>
