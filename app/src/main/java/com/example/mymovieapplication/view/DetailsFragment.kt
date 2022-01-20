@@ -32,7 +32,7 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let { movie ->
             binding.detailsFragmentMovieName.text = movie.name
-            binding.detailsFragmentMovieYear.text = movie.year.toString()
+            binding.detailsFragmentMovieYear.text = movie.year
             binding.detailsFragmentMovieRating.text = movie.rating.toString()
             binding.detailsFragmentMovieDescription.text = movie.description
         }

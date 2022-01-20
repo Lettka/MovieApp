@@ -75,6 +75,9 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
                     150
                 )
                 movieName.layoutParams = paramsName
+                movieName.maxLines = 2
+                movieName.ellipsize = TextUtils.TruncateAt.END
+
 
                 val movieImg = ImageView(itemView.context)
                 val paramsImg = LinearLayout.LayoutParams(
@@ -86,7 +89,7 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
                 movieImg.scaleType = ImageView.ScaleType.CENTER_CROP
 
                 val movieYear = TextView(itemView.context)
-                movieYear.text = movie.year.toString()
+                movieYear.text = movie.year
                 movieYear.setPadding(10)
 
                 val movieDescription = TextView(itemView.context)
@@ -101,13 +104,13 @@ class MainFragmentAdapter(private var onItemViewClickListener: MainFragment.OnIt
                 categoryLinearLayout.addView(movieLinearLayout)
             }
 
-            itemView.setOnClickListener {
+            /*itemView.setOnClickListener {
                 Toast.makeText(
                     itemView.context,
                     category.name,
                     Toast.LENGTH_LONG
                 ).show()
-            }
+            }*/
         }
     }
 

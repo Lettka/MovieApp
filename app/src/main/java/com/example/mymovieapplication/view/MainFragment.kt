@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DiffUtil
 import com.example.mymovieapplication.R
 import com.example.mymovieapplication.databinding.MainFragmentBinding
-import com.example.mymovieapplication.model.Category
+import com.example.mymovieapplication.model.CategoryDTO
+import com.example.mymovieapplication.model.CategoryLoader
 import com.example.mymovieapplication.model.Movie
 import com.example.mymovieapplication.viewmodel.AppState
 import com.example.mymovieapplication.viewmodel.MainViewModel
@@ -56,30 +58,6 @@ class MainFragment : Fragment() {
             renderData(it)
         })
         viewModel.getMovieFromLocalSourceRus()
-
-        binding.updateData.setOnClickListener {
-            val categoryList: List<Category> = listOf(
-                Category(
-                    "Популярные", listOf(
-                        Movie("qwrfae",
-                            "name",
-                            2021,
-                            55.0,
-                            "В Гоянии на свет появляются близнецы Кристиан и Кристофер, но вскоре их мать умирает. Мальчиков разлучают, Кристофера усыновила богатая семья, они дали ему новое имя – Ренату, а Кристиан, которого не в состоянии был воспитывать родной отец, оказался в приюте.",
-                            false
-                        )
-                    )
-                ),
-                Category("Смотрят сейчас"),
-                Category("Ожидаемые"),
-            )
-            val categoryDiffUtilCallback: CategoryDiffUtilCallback =
-                CategoryDiffUtilCallback(adapter.getCategory(), categoryList)
-            val categoryDiffResult = DiffUtil.calculateDiff(categoryDiffUtilCallback)
-            adapter.setCategory(categoryList)
-            categoryDiffResult.dispatchUpdatesTo(adapter)
-
-        }
     }
 
     private fun changeMovieDataSet() {
@@ -97,7 +75,38 @@ class MainFragment : Fragment() {
             when (appState) {
                 is AppState.Success -> {
                     mainFragmentLoadingLayout.hide()
-                    //adapter.setCategory(appState.movieData)
+
+                    for (category in appState.movieData) {
+                        CategoryLoader.load(
+                            category,
+                            object : CategoryLoader.OnCategoryLoadListener {
+                                override fun onLoaded(categoryDTO: CategoryDTO) {
+                                    //category.listOfMovie = emptyList()
+                                    for (movie in categoryDTO.movies) {
+                                        val itemMovie = Movie(
+                                            movie.id.toString(),
+                                            movie.title.toString(),
+                                            movie.releaseDate.toString(),
+                                            movie.rating,
+                                            movie.overview.toString(),
+                                            false
+                                        )
+                                        category.listOfMovie += itemMovie
+                                    }
+                                }
+
+                                override fun onFailed(throwable: Throwable) {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        throwable.message,
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+
+                            }
+                        )
+                    }
+
                     val categoryDiffUtilCallback: CategoryDiffUtilCallback =
                         CategoryDiffUtilCallback(adapter.getCategory(), appState.movieData)
                     val categoryDiffResult = DiffUtil.calculateDiff(categoryDiffUtilCallback)

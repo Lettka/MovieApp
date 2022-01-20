@@ -22,13 +22,6 @@
         android:src="@drawable/ic_baseline_outlined_flag_24"
         app:maxImageSize="@dimen/maxImgSize_35" />
 
-    <Button
-        android:id="@+id/updateData"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:text="@string/update" />
-
     <LinearLayout
         android:id="@+id/main_fragment_loading_layout"
         android:layout_width="match_parent"
