@@ -13,7 +13,8 @@
     <dimen name="marginTop_loading_20">20dp</dimen>
     <dimen name="textSize_35">35sp</dimen>
     <dimen name="margin_10">10dp</dimen>
-    <dimen name="height_movie_post">150dp</dimen>
+    <dimen name="height_movie_post">350dp</dimen>
     <dimen name="textSize_20">20sp</dimen>
     <dimen name="margin_15">15dp</dimen>
+    <dimen name="item_width_200dp">200dp</dimen>
 </resources>
