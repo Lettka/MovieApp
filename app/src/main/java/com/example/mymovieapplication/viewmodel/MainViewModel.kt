@@ -15,20 +15,28 @@ class MainViewModel(
 
     fun getLiveData() = liveDataToObserve
 
-    fun getMovieFromLocalSource() = getDataFromLocalSource()
+    fun getMovieFromLocalSourceRus() = getDataFromLocalSource(true)
 
-    fun getMovieFromRemoteSource() = getDataFromLocalSource()
+    fun getMovieFromRemoteSourceEng() = getDataFromLocalSource(false)
 
-    private fun getDataFromLocalSource() {
+    fun getMovieFromRemoteSource() = getDataFromLocalSource(true)
+
+    private fun getDataFromLocalSource(isRussian: Boolean = true) {
         liveDataToObserve.value = AppState.Loading
         Thread {
-            sleep(1000)
-            if (Random.nextBoolean()) {
-                liveDataToObserve.postValue(AppState.Success(repositoryImpl.getMovieFromLocalStorage()))
+            sleep(100)
+            if (true) {
+                liveDataToObserve.postValue(
+                    AppState.Success(
+                        if (isRussian)
+                            repositoryImpl.getMovieFromLocalStorageRus()
+                        else
+                            repositoryImpl.getMovieFromLocalStorageEng()
+                    )
+                )
             } else {
                 liveDataToObserve.postValue((AppState.Error(Exception("check Internet"))))
             }
-
         }.start()
     }
 

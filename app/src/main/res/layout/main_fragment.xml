@@ -1,81 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/mainView"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/category_scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:orientation="vertical"
-        tools:context=".view.MainFragment">
-
-        <TextView
-            android:id="@+id/category"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop_category_30"
-            android:text="@string/popular"
-            android:textSize="@dimen/textSize_category_25"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/movieImg"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="@dimen/marginTop_category_30"
-            android:background="@color/purple_200"
-            android:scaleType="centerCrop"
-            tools:src="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/movieName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="35sp"
-            android:textStyle="bold"
-            tools:text="Movie" />
-
+        android:layout_height="match_parent">
         <LinearLayout
+            android:id="@+id/linearLayoutForRecycle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/movieYear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="italic"
-                tools:text="2021" />
-
-            <TextView
-                android:id="@+id/movieRating"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                tools:text="5" />
-        </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/movieDescription"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:ellipsize="end"
-            android:maxLines="5"
-            tools:text="@tools:sample/lorem/random" />
+            android:orientation="vertical"/>
+    </androidx.core.widget.NestedScrollView>
 
-
-    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/main_fragment_FAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/margin_FAB_20"
+        android:src="@drawable/ic_baseline_outlined_flag_24"
+        app:maxImageSize="@dimen/maxImgSize_35" />
 
     <LinearLayout
-        android:id="@+id/loadingLayout"
+        android:id="@+id/main_fragment_loading_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/darker_gray"
@@ -85,12 +37,12 @@
         tools:visibility="gone">
 
         <TextView
-            android:id="@+id/loading"
+            android:id="@+id/main_fragment_loading"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
+            android:layout_marginTop="@dimen/marginTop_loading_20"
             android:text="@string/loading"
-            android:textSize="35sp"
+            android:textSize="@dimen/textSize_35"
             android:textStyle="bold" />
 
         <ProgressBar
@@ -98,4 +50,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+
 </FrameLayout>
