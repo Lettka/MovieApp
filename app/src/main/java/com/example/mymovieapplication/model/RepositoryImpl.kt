@@ -1,9 +1,26 @@
 package com.example.mymovieapplication.model
 
-class RepositoryImpl : Repository {
-    override fun getMovieFromServer(): Movie = Movie()
+object RepositoryImpl : Repository {
 
-    override fun getMovieFromLocalStorageRus(): List<Category> = getCategoriesRus()
+    private val listeners: MutableList<Repository.OnLoadListener> = mutableListOf()
+    private var category: Category? = null
 
-    override fun getMovieFromLocalStorageEng(): List<Category> = getCategoriesEng()
+    override fun getCategoryFromServer(): Category? = category
+
+    override fun getCategoryFromLocalStorageRus(): List<Category> = getCategoriesRus()
+
+    override fun getCategoryFromLocalStorageEng(): List<Category> = getCategoriesEng()
+
+    override fun categoryLoaded(category: Category?) {
+        this.category = category
+        listeners.forEach{it.onLoaded()}
+    }
+
+    override fun addLoadListener(listener: Repository.OnLoadListener) {
+        listeners.add(listener)
+    }
+
+    override fun removeLoadListener(listener: Repository.OnLoadListener) {
+        listeners.remove(listener)
+    }
 }

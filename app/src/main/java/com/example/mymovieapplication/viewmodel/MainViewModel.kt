@@ -5,11 +5,10 @@ import androidx.lifecycle.ViewModel
 import com.example.mymovieapplication.model.Repository
 import com.example.mymovieapplication.model.RepositoryImpl
 import java.lang.Thread.sleep
-import kotlin.random.Random
 
 class MainViewModel(
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
-    private val repositoryImpl: Repository = RepositoryImpl()
+    private val repositoryImpl: Repository = RepositoryImpl
 ) :
     ViewModel() {
 
@@ -29,9 +28,9 @@ class MainViewModel(
                 liveDataToObserve.postValue(
                     AppState.Success(
                         if (isRussian)
-                            repositoryImpl.getMovieFromLocalStorageRus()
+                            repositoryImpl.getCategoryFromLocalStorageRus()
                         else
-                            repositoryImpl.getMovieFromLocalStorageEng()
+                            repositoryImpl.getCategoryFromLocalStorageEng()
                     )
                 )
             } else {

@@ -31,10 +31,12 @@ class DetailsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         arguments?.getParcelable<Movie>(BUNDLE_EXTRA)?.let { movie ->
-            binding.detailsFragmentMovieName.text = movie.name
-            binding.detailsFragmentMovieYear.text = movie.year
-            binding.detailsFragmentMovieRating.text = movie.rating.toString()
-            binding.detailsFragmentMovieDescription.text = movie.description
+            with(binding) {
+                detailsFragmentMovieName.text = movie.name
+                detailsFragmentMovieYear.text = movie.year
+                detailsFragmentMovieRating.text = movie.rating.toString()
+                detailsFragmentMovieDescription.text = movie.description
+            }
         }
     }
 

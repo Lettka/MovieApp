@@ -16,45 +16,51 @@ object CategoryLoader {
 
     fun load(category: Category, listener: OnCategoryLoadListener) {
 
-        val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
+        //val handler = Handler(Looper.myLooper() ?: Looper.getMainLooper())
 
-        Thread {
-            var urlConnection: HttpsURLConnection? = null
-            try {
-                val uri = when (category.name) {
-                    "Популярные", "Popular" -> URL("https://api.themoviedb.org/3/movie/popular?api_key=${BuildConfig.MOVIE_API_KEY}&page=1")
-                    //"Новинки", "New" -> URL("https://api.themoviedb.org/3/movie/latest?api_key=${BuildConfig.MOVIE_API_KEY}&page=1")
-                    "Смотрят сейчас", "Now Playing" -> URL("https://api.themoviedb.org/3/movie/now_playing?api_key=${BuildConfig.MOVIE_API_KEY}&page=1")
-                    "Ожидаемые", "Upcoming" -> URL("https://api.themoviedb.org/3/movie/upcoming?api_key=${BuildConfig.MOVIE_API_KEY}&page=1")
-                    "Лучшие", "Top Rated" -> URL("https://api.themoviedb.org/3/movie/top_rated?api_key=${BuildConfig.MOVIE_API_KEY}&page=1")
-                    else -> URL("https://api.themoviedb.org/3/movie/popular?api_key=${BuildConfig.MOVIE_API_KEY}&page=1")
-                }
+        var urlConnection: HttpsURLConnection? = null
+        try {
 
-                urlConnection = uri.openConnection() as HttpsURLConnection
-                urlConnection.requestMethod = "GET"
-                urlConnection.readTimeout = 50000
-                urlConnection.connectTimeout = 50000
-                val reader = BufferedReader(InputStreamReader(urlConnection.inputStream))
+            val uri = when (category.name) {
+                "Популярные", "Popular" -> URL("https://api.themoviedb.org/3/movie/popular?page=1")
+                //"Новинки", "New" -> URL("https://api.themoviedb.org/3/movie/latest?page=1")
+                "Смотрят сейчас", "Now Playing" -> URL("https://api.themoviedb.org/3/movie/now_playing?page=1")
+                "Ожидаемые", "Upcoming" -> URL("https://api.themoviedb.org/3/movie/upcoming?page=1")
+                "Лучшие", "Top Rated" -> URL("https://api.themoviedb.org/3/movie/top_rated?page=1")
+                else -> URL("https://api.themoviedb.org/3/movie/popular?page=1")
+            }
+
+            urlConnection = uri.openConnection() as HttpsURLConnection
+            with(urlConnection) {
+                requestMethod = "GET"
+                readTimeout = 50000
+                connectTimeout = 50000
+
+                addRequestProperty("Authorization", "Bearer ${BuildConfig.MOVIE_API_TOKEN}")
+
+                val reader = BufferedReader(InputStreamReader(inputStream))
                 val result = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     reader.lines().collect(Collectors.joining("\n"))
                 } else {
                     ""
                 }
                 val categoryDTO = Gson().fromJson(result, CategoryDTO::class.java)
-                handler.post {
+                listener.onLoaded(categoryDTO)
+                /*handler.post {
                     listener.onLoaded(categoryDTO)
-                }
-            } catch (e: Exception) {
-                handler.post {
-                    listener.onFailed(e)
-                }
-                Log.e("DEBUGLOG", "FAIL CONNECTION", e)
-            } finally {
-                urlConnection?.disconnect()
+                }*/
             }
-        }.start()
-
+        } catch (e: Exception) {
+            listener.onFailed(e)
+            /*handler.post {
+                listener.onFailed(e)
+            }*/
+            Log.e("DEBUGLOG", "FAIL CONNECTION", e)
+        } finally {
+            urlConnection?.disconnect()
+        }
     }
+
 
     interface OnCategoryLoadListener {
         fun onLoaded(categoryDTO: CategoryDTO)
