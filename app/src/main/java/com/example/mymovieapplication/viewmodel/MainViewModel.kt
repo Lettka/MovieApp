@@ -5,30 +5,37 @@ import androidx.lifecycle.ViewModel
 import com.example.mymovieapplication.model.Repository
 import com.example.mymovieapplication.model.RepositoryImpl
 import java.lang.Thread.sleep
-import kotlin.random.Random
 
 class MainViewModel(
     private val liveDataToObserve: MutableLiveData<AppState> = MutableLiveData(),
-    private val repositoryImpl: Repository = RepositoryImpl()
+    private val repositoryImpl: Repository = RepositoryImpl
 ) :
     ViewModel() {
 
     fun getLiveData() = liveDataToObserve
 
-    fun getMovieFromLocalSource() = getDataFromLocalSource()
+    fun getMovieFromLocalSourceRus() = getDataFromLocalSource(true)
 
-    fun getMovieFromRemoteSource() = getDataFromLocalSource()
+    fun getMovieFromRemoteSourceEng() = getDataFromLocalSource(false)
 
-    private fun getDataFromLocalSource() {
+    fun getMovieFromRemoteSource() = getDataFromLocalSource(true)
+
+    private fun getDataFromLocalSource(isRussian: Boolean = true) {
         liveDataToObserve.value = AppState.Loading
         Thread {
-            sleep(1000)
-            if (Random.nextBoolean()) {
-                liveDataToObserve.postValue(AppState.Success(repositoryImpl.getMovieFromLocalStorage()))
+            sleep(100)
+            if (true) {
+                liveDataToObserve.postValue(
+                    AppState.Success(
+                        if (isRussian)
+                            repositoryImpl.getCategoryFromLocalStorageRus()
+                        else
+                            repositoryImpl.getCategoryFromLocalStorageEng()
+                    )
+                )
             } else {
                 liveDataToObserve.postValue((AppState.Error(Exception("check Internet"))))
             }
-
         }.start()
     }
 
