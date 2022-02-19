@@ -1,9 +1,16 @@
 package com.example.mymovieapplication.model
 
-data class Movie(
-    val name: String = "Foam of the Days",
-    val year: Int = 2013,
-    val rating: Double = 6.7,
-    val description: String = "A love story unfolding in a fantastic world."
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
-)
+@Parcelize
+data class Movie(
+    val id: String = "0",
+    val name: String = "",
+    val year: String = "",
+    var rating: Double? = 0.0,
+    val description: String = "",
+    val imagePath: String? = "",
+    var isLike: Boolean = false
+) : Parcelable
+

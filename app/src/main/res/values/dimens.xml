@@ -6,4 +6,16 @@
     <dimen name="feels_like_text_size">30sp</dimen>
     <dimen name="marginTop_category_30">30dp</dimen>
     <dimen name="textSize_category_25">25sp</dimen>
+    <dimen name="marginStart_category_20">20dp</dimen>
+    <dimen name="height_category_content_300">300dp</dimen>
+    <dimen name="margin_FAB_20">20dp</dimen>
+    <dimen name="maxImgSize_35">35dp</dimen>
+    <dimen name="marginTop_loading_20">20dp</dimen>
+    <dimen name="textSize_35">35sp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="height_movie_post">350dp</dimen>
+    <dimen name="textSize_20">20sp</dimen>
+    <dimen name="margin_15">15dp</dimen>
+    <dimen name="item_width_200dp">200dp</dimen>
+    <dimen name="height_movie_post_700dp">700dp</dimen>
 </resources>
