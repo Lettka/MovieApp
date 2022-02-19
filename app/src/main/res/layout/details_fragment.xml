@@ -4,66 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
+    android:background="?attr/colorOnPrimary"
     android:clickable="true"
     android:focusable="true">
 
-    <LinearLayout
-        android:id="@+id/details_fragment_view"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin_10"
-        android:orientation="vertical"
-        tools:context=".view.MainFragment">
-
-        <TextView
-            android:id="@+id/details_fragment_movie_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_10"
-            android:textSize="@dimen/textSize_35"
-            android:textStyle="bold"
-            tools:text="@string/movie_name" />
-
-        <ImageView
-            android:id="@+id/details_fragment_movie_img"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_movie_post"
-            android:layout_marginTop="@dimen/marginTop_category_30"
-            android:background="@color/purple_200"
-            android:scaleType="centerCrop"
-            tools:src="@tools:sample/avatars" />
-
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/details_fragment_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_10"
+            android:orientation="vertical"
+            tools:context=".view.MainFragment">
 
             <TextView
-                android:id="@+id/details_fragment_movie_year"
+                android:id="@+id/details_fragment_movie_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="italic"
-                tools:text="@string/movie_year" />
+                android:layout_marginTop="@dimen/margin_10"
+                android:textSize="@dimen/textSize_35"
+                android:textStyle="bold"
+                tools:text="@string/movie_name" />
+
+            <ImageView
+                android:id="@+id/details_fragment_movie_img"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_movie_post_700dp"
+                android:layout_marginTop="@dimen/marginTop_category_30"
+                android:background="@color/purple_200"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/avatars" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/details_fragment_movie_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textStyle="italic"
+                    tools:text="@string/movie_year" />
+
+                <TextView
+                    android:id="@+id/details_fragment_movie_rating"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textSize="@dimen/textSize_20"
+                    android:textStyle="bold"
+                    tools:text="5" />
+            </LinearLayout>
+
 
             <TextView
-                android:id="@+id/details_fragment_movie_rating"
-                android:layout_width="match_parent"
+                android:id="@+id/details_fragment_movie_description"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="end"
-                android:textSize="@dimen/textSize_20"
-                android:textStyle="bold"
-                tools:text="5" />
+                android:layout_marginTop="@dimen/margin_15"
+                tools:text="@tools:sample/lorem/random" />
         </LinearLayout>
-
-
-        <TextView
-            android:id="@+id/details_fragment_movie_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_15"
-            android:ellipsize="end"
-            android:maxLines="5"
-            tools:text="@tools:sample/lorem/random" />
-    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 </FrameLayout>

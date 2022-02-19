@@ -17,4 +17,5 @@
     <dimen name="textSize_20">20sp</dimen>
     <dimen name="margin_15">15dp</dimen>
     <dimen name="item_width_200dp">200dp</dimen>
+    <dimen name="height_movie_post_700dp">700dp</dimen>
 </resources>

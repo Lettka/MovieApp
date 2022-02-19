@@ -12,12 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyMovieApplication">
         <receiver
-            android:name=".model.MainReceiver"
+            android:name=".view.MainReceiver"
             android:enabled="true"
             android:exported="true" />
 
         <service
-            android:name=".model.MainIntentService"
+            android:name=".view.MainIntentService"
             android:exported="false" />
 
 

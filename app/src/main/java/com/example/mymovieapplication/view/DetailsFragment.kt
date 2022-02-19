@@ -5,14 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import coil.ImageLoader
+import coil.request.ImageRequest
+import com.example.mymovieapplication.R
 import com.example.mymovieapplication.databinding.DetailsFragmentBinding
-import com.example.mymovieapplication.databinding.MainFragmentBinding
 import com.example.mymovieapplication.model.Movie
-import com.example.mymovieapplication.viewmodel.AppState
-import com.example.mymovieapplication.viewmodel.MainViewModel
-import com.google.android.material.snackbar.Snackbar
 
 class DetailsFragment : Fragment() {
 
@@ -36,6 +33,16 @@ class DetailsFragment : Fragment() {
                 detailsFragmentMovieYear.text = movie.year
                 detailsFragmentMovieRating.text = movie.rating.toString()
                 detailsFragmentMovieDescription.text = movie.description
+
+                val request = ImageRequest.Builder(requireActivity())
+                    .data("https://www.themoviedb.org/t/p/w600_and_h900_bestv2${movie.imagePath}")
+                    .target(detailsFragmentMovieImg)
+                    .placeholder(R.drawable.movie)
+                    .build()
+
+                ImageLoader.Builder(requireActivity())
+                    .build()
+                    .enqueue(request)
             }
         }
     }

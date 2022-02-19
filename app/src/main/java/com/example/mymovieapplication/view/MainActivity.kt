@@ -5,7 +5,6 @@ import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mymovieapplication.R
-import com.example.mymovieapplication.model.MainReceiver
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,4 +1,6 @@
-package com.example.mymovieapplication.model
+package com.example.mymovieapplication.repository
+
+import com.example.mymovieapplication.model.Category
 
 interface Repository {
     fun getCategoryFromServer(): Category?

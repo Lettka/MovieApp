@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mymovieapplication.R
 import com.example.mymovieapplication.databinding.MainFragmentBinding
 import com.example.mymovieapplication.model.*
+import com.example.mymovieapplication.repository.Repository
+import com.example.mymovieapplication.repository.RepositoryImpl
 import com.example.mymovieapplication.viewmodel.AppState
 import com.example.mymovieapplication.viewmodel.MainViewModel
 
@@ -113,7 +115,7 @@ class MainFragment : Fragment() {
     private fun displayCategoryData(category: Category) {
         when (adapterList[category.name]) {
             null -> adapterList[category.name] =
-                MainFragmentAdapter(object : OnItemViewClickListener {
+                MainFragmentAdapter(requireContext(), object : OnItemViewClickListener {
                     override fun onItemViewClick(movie: Movie) {
                         activity?.supportFragmentManager?.apply {
                             beginTransaction()

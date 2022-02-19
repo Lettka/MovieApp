@@ -1,4 +1,8 @@
-package com.example.mymovieapplication.model
+package com.example.mymovieapplication.repository
+
+import com.example.mymovieapplication.model.Category
+import com.example.mymovieapplication.model.getCategoriesEng
+import com.example.mymovieapplication.model.getCategoriesRus
 
 object RepositoryImpl : Repository {
 
@@ -12,7 +16,7 @@ object RepositoryImpl : Repository {
     override fun getCategoryFromLocalStorageEng(): List<Category> = getCategoriesEng()
 
     override fun categoryLoaded(category: Category?) {
-        this.category = category
+        RepositoryImpl.category = category
         listeners.forEach{it.onLoaded()}
     }
 

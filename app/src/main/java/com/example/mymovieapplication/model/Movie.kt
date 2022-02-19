@@ -10,6 +10,7 @@ data class Movie(
     val year: String = "",
     var rating: Double? = 0.0,
     val description: String = "",
+    val imagePath: String? = "",
     var isLike: Boolean = false
 ) : Parcelable
 

@@ -1,9 +1,13 @@
-package com.example.mymovieapplication.model
+package com.example.mymovieapplication.view
 
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import com.example.mymovieapplication.model.Category
+import com.example.mymovieapplication.repository.RepositoryImpl
+
+private const val CATEGORY_EXTRA = "CATEGORY_EXTRA"
 
 class MainReceiver : BroadcastReceiver() {
 
@@ -17,7 +21,7 @@ class MainReceiver : BroadcastReceiver() {
         when (intent.action) {
             CATEGORY_LOAD_SUCCESS -> RepositoryImpl.categoryLoaded(
                 intent.extras?.getParcelable<Category>(
-                    "CATEGORY_EXTRA"
+                    CATEGORY_EXTRA
                 )
             )
             CATEGORY_LOAD_FAILED -> RepositoryImpl.categoryLoaded(null)

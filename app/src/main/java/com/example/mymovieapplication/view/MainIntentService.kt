@@ -1,8 +1,14 @@
-package com.example.mymovieapplication.model
+package com.example.mymovieapplication.view
 
 import android.app.IntentService
 import android.content.Intent
 import android.util.Log
+import com.example.mymovieapplication.model.Category
+import com.example.mymovieapplication.model.CategoryDTO
+import com.example.mymovieapplication.model.Movie
+import com.example.mymovieapplication.viewmodel.CategoryLoader
+
+private const val CATEGORY_EXTRA = "CATEGORY_EXTRA"
 
 class MainIntentService : IntentService("MainIntentService") {
 
@@ -15,7 +21,7 @@ class MainIntentService : IntentService("MainIntentService") {
         Log.d(TAG, "current thread: ${Thread.currentThread().name}")
 
         intent?.getParcelableExtra<Category>("CATEGORY_EXTRA")?.let { category ->
-            CategoryLoader.load(category, object : CategoryLoader.OnCategoryLoadListener {
+            CategoryLoader.loadRetrofit(category, object : CategoryLoader.OnCategoryLoadListener {
 
                 override fun onLoaded(categoryDTO: CategoryDTO) {
                     applicationContext.sendBroadcast(
@@ -28,11 +34,12 @@ class MainIntentService : IntentService("MainIntentService") {
                                     movie.releaseDate.toString(),
                                     movie.rating,
                                     movie.overview.toString(),
+                                    movie.posterPath.toString(),
                                     false
                                 )
                                 category.listOfMovie += itemMovie
                             }
-                            putExtra("CATEGORY_EXTRA", category)
+                            putExtra(CATEGORY_EXTRA, category)
                         }
                     )
                 }
